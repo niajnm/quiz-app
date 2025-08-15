@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz/app/module/home/view_model/quiz_provider.dart';
-import '../providers/quiz_provider.dart';
 import 'quiz_screen.dart';
 import 'leaderboard_screen.dart';
 

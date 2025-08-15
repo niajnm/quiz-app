@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz/app/module/home/view_model/quiz_provider.dart';
-import '../providers/quiz_provider.dart';
 import 'leaderboard_screen.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -33,6 +32,7 @@ class ResultScreen extends StatelessWidget {
                 if (name.isNotEmpty) {
                   await quiz.saveScore(name);
                   Navigator.pushReplacement(
+                    // ignore: use_build_context_synchronously
                     context,
                     MaterialPageRoute(builder: (_) => LeaderboardScreen()),
                   );

@@ -1,10 +1,15 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:quiz/app/data/local/question_local/questions_local_source.dart';
+import 'package:quiz/app/data/repository/questions_repository_source.dart';
 import 'package:quiz/app/module/home/model/model.dart';
+import 'package:quiz/app/utils/core/services/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
 
 class QuizProvider with ChangeNotifier {
+  final QuestionRepositorySource _questionSource =
+      serviceLocator<QuestionRepositorySource>();
   List<Question> _questions = [];
   int _currentIndex = 0;
   int _score = 0;
@@ -21,9 +26,8 @@ class QuizProvider with ChangeNotifier {
   List<Map<String, dynamic>> get leaderboard => _leaderboard;
 
   Future<void> loadQuestions() async {
-    final data = await rootBundle.loadString('assets/questions.json');
-    final jsonData = json.decode(data) as List;
-    _questions = jsonData.map((q) => Question.fromJson(q)).toList();
+    final data = await _questionSource.fetchQuestionsGet(0);
+    _questions = data;
     notifyListeners();
   }
 
@@ -31,7 +35,12 @@ class QuizProvider with ChangeNotifier {
     if (_answered) return;
     _selectedAnswer = index;
     _answered = true;
-    if (_questions[_currentIndex].answerIndex == index) _score++;
+
+    // Handle timer expiry (index -1) or valid answer
+    if (index >= 0 && _questions[_currentIndex].answerIndex == index) {
+      _score++;
+    }
+
     notifyListeners();
   }
 
