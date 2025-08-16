@@ -36,19 +36,19 @@ jobs:
       - name: Build APK
         run: flutter build apk 
 
-      # # Build AppBundle (for Play Store)
-      # - name: Build AppBundle
-      #   run: flutter build appbundle 
+      # Build AppBundle (for Play Store)
+      - name: Build AppBundle
+        run: flutter build appbundle 
 
-      # # Upload build artifacts
-      # - name: Upload APK
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: release-apk
-      #     path: build/app/outputs/flutter-apk/app-release.apk
+      # Upload build artifacts
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
 
-      # - name: Upload AAB
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: release-aab
-      #     path: build/app/outputs/bundle/release/app-release.aab
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-aab
+          path: build/app/outputs/bundle/release/app-release.aab
