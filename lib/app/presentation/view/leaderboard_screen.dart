@@ -57,7 +57,6 @@ class LeaderboardScreen extends StatelessWidget {
     );
   }
 
-  /// Helper to get badge details for a given position
   _Badge _getBadge(int position) {
     switch (position) {
       case 1:
@@ -72,7 +71,6 @@ class LeaderboardScreen extends StatelessWidget {
   }
 }
 
-/// Simple model for badge data
 class _Badge {
   final Color color;
   final IconData icon;

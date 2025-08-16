@@ -10,7 +10,6 @@ class ScoreBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Circular score badge
         Container(
           width: 150,
           height: 150,

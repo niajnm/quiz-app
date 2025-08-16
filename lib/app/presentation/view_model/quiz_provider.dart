@@ -55,8 +55,6 @@ class QuizProvider with ChangeNotifier {
         _score++;
       }
     }
-    // If index is -1 (time expired), no score increment (counts as wrong)
-
     notifyListeners();
   }
 

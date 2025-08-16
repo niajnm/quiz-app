@@ -56,10 +56,6 @@ class HomeScreen extends StatelessWidget {
                         quizProvider.resetQuiz();
 
                         Navigator.pushNamed(context, RoutePaths.quiz);
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (_) => const QuizScreen()),
-                        // );
                       },
                     ),
                     const SizedBox(height: 15),
@@ -71,11 +67,6 @@ class HomeScreen extends StatelessWidget {
                       onPressed: () async {
                         await quizProvider.loadLeaderboard();
                         Navigator.pushNamed(context, RoutePaths.leaderboard);
-
-                        // Navigator.pushReplacementNamed(
-                        //   context,
-                        //   RoutePaths.leaderboard,
-                        // );
                       },
                     ),
                   ],
