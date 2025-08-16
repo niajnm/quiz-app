@@ -25,23 +25,11 @@ class QuizProvider with ChangeNotifier {
   List<Map<String, dynamic>> get leaderboard => _leaderboard;
 
   Future<void> loadQuestions() async {
-    final data = await _questionSource.fetchQuestionsGet(0);
+    final data = await _questionSource.fetchQuestionsGet();
     _questions = data;
     notifyListeners();
   }
 
-  // void selectAnswer(int index) {
-  //   if (_answered) return;
-  //   _selectedAnswer = index;
-  //   _answered = true;
-
-  //   // Handle timer expiry (index -1) or valid answer
-  //   if (index >= 0 && _questions[_currentIndex].answerIndex == index) {
-  //     _score++;
-  //   }
-
-  //   notifyListeners();
-  // }
   void selectAnswer(int index) {
     if (_answered) return;
 
