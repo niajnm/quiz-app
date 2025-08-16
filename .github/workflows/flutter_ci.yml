@@ -1,0 +1,54 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repo
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Setup Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0' # Use your Flutter version
+          channel: 'stable'
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: flutter pub get
+
+      # Run tests
+      - name: Run Tests
+        run: flutter test
+
+      # Build APK
+      - name: Build APK
+        run: flutter build apk --release
+
+      # Build AppBundle (for Play Store)
+      - name: Build AppBundle
+        run: flutter build appbundle --release
+
+      # Upload build artifacts
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-aab
+          path: build/app/outputs/bundle/release/app-release.aab
