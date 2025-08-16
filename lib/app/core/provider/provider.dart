@@ -1,13 +1,13 @@
 import 'package:provider/provider.dart';
-import 'package:quiz/app/module/home/view_model/quiz_provider.dart';
-import 'package:quiz/app/module/home/view_model/timer_provider.dart';
+import 'package:quiz/app/presentation/view_model/quiz_provider.dart';
+import 'package:quiz/app/presentation/view_model/timer_provider.dart';
 import 'package:quiz/main.dart';
 
 class ProviderPath {
   static dynamic providersList = [
     ChangeNotifierProvider(create: (_) => QuizProvider(), child: const MyApp()),
-
     ChangeNotifierProvider(create: (_) => TimerProvider(), lazy: true),
+
     // ChangeNotifierProvider(create: (_) => BottomNavController(), lazy: true),
     // ChangeNotifierProvider(create: (_) => ThemeController(), lazy: true),
   ];

@@ -1,14 +1,15 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:quiz/app/utils/core/network/dio_provider.dart';
-import 'package:quiz/app/utils/core/network/error_handlers.dart';
-import 'package:quiz/app/utils/core/network/exceptions/base_exception.dart';
+import 'package:quiz/app/core/network/dio_provider.dart';
+import 'package:quiz/app/core/network/error_handlers.dart';
+import 'package:quiz/app/core/network/exceptions/base_exception.dart';
+import 'package:quiz/flavors/build_config.dart';
 
 abstract class BaseRemoteSource {
   Dio get dioClient => DioProvider.client;
 
-  //final logger = BuildConfig.instance.config.logger;
+  final logger = BuildConfig.instance.config.logger;
 
   Future<Response<T>> callApiWithErrorParser<T>(Future<Response<T>> api) async {
     try {

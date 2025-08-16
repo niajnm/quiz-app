@@ -1,6 +1,6 @@
 // components/option_tile.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_math_fork/flutter_math.dart';
+import 'package:quiz/app/core/utils/math_text_parser.dart';
 
 class OptionTile extends StatelessWidget {
   final String option;
@@ -48,9 +48,10 @@ class OptionTile extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-          child: Math.tex(
+          child: MathTextParser.createMixedContentWidget(
             option,
             textStyle: theme.textTheme.bodyLarge?.copyWith(fontSize: 18),
+            crossAxisAlignment: WrapCrossAlignment.center,
           ),
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:quiz/app/utils/core/network/pretty_dio_logger.dart';
-import 'package:quiz/app/utils/core/network/request_headers.dart';
+import 'package:quiz/app/core/network/pretty_dio_logger.dart';
+import 'package:quiz/app/core/network/request_headers.dart';
 
 import 'package:quiz/flavors/build_config.dart';
 

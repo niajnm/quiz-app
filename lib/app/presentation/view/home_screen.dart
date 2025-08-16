@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quiz/app/module/home/view_model/quiz_provider.dart';
-import 'quiz_screen.dart';
-import 'leaderboard_screen.dart';
+import 'package:quiz/app/presentation/view_model/quiz_provider.dart';
+import 'package:quiz/app/route/route_paths.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 231, 115, 21),
+              Color.fromARGB(255, 59, 80, 199),
               Color.fromARGB(255, 70, 71, 71),
             ],
             begin: Alignment.topLeft,
@@ -44,7 +43,6 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
                       ),
                     ),
                     const SizedBox(height: 30),
@@ -56,10 +54,12 @@ class HomeScreen extends StatelessWidget {
                       onPressed: () async {
                         await quizProvider.loadQuestions();
                         quizProvider.resetQuiz();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const QuizScreen()),
-                        );
+
+                        Navigator.pushNamed(context, RoutePaths.quiz);
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (_) => const QuizScreen()),
+                        // );
                       },
                     ),
                     const SizedBox(height: 15),
@@ -70,12 +70,12 @@ class HomeScreen extends StatelessWidget {
                       color: Colors.orange,
                       onPressed: () async {
                         await quizProvider.loadLeaderboard();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const LeaderboardScreen(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, RoutePaths.leaderboard);
+
+                        // Navigator.pushReplacementNamed(
+                        //   context,
+                        //   RoutePaths.leaderboard,
+                        // );
                       },
                     ),
                   ],

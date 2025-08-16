@@ -1,5 +1,5 @@
 import 'package:logger/logger.dart';
-import 'package:quiz/app/utils/constants.dart';
+import 'package:quiz/app/core/utils/constants.dart';
 
 class EnvConfig {
   final String appName;

@@ -1,16 +1,100 @@
-# quiz
+# Flutter Quiz App
 
-A new Flutter project.
+A sleek offline quiz application with LaTeX support, built with **clean architecture** and modern Flutter practices.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- **Offline Quiz Experience** - Questions loaded from local JSON
+- **LaTeX Math Support** - Renders mathematical equations perfectly
+- **Timed Questions** - 15-second countdown per question
+- **Persistent Leaderboard** - Local storage with SharedPreferences
+- **Smart Dark Theme** - Follows system theme automatically
+- **Smooth Animations** - Beautiful question transitions
 
-A few resources to get you started if this is your first Flutter project:
+## Architecture Highlights
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Clean Architecture + Repository Pattern**
+```
+lib/app/
+├── core/                  # Base classes, theme, utilities
+│   ├── base/              # BaseView, BaseWidget, BaseRemoteSource
+│   ├── theme/             # AppTheme with system dark/light mode
+│   └── utils/             # Common functions & constants
+├── data/                  # Data layer abstraction
+│   ├── local/             # SharedPreferences, local storage
+│   ├── remote/            # Remote data sources
+│   └── repository/        # Repository implementation
+├── domain/                # Business logic layer
+│   ├── models/            # Data models (Question)
+│   ├── entities/          # Domain entities
+│   └── usecases/          # Business use cases
+├── presentation/          # UI & State management
+│   ├── view/              # Screen widgets
+│   ├── view_model/        # Provider classes
+│   └── components/        # Reusable UI components
+├── route/                 # App routing configuration
+├── network/               # API client setup
+└── provider/              # Global DI setup
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Quality-Focused Code:**
+- **Singleton Pattern** for API client and core services
+- **Repository Pattern** for clean data abstraction
+- **Dependency Injection** with Service Locator pattern
+- **Multi-Flavor Build** configuration ready
+- **Provider Pattern** for reactive state management
+- **Mixin Pattern** for reusable widget behaviors
+- **Clean Separation** of concerns across layers
+
+## Quick Start
+
+```bash
+# Clone & Setup
+git clone <repository-url>
+cd flutter-quiz-app
+flutter pub get
+
+# Run the app
+flutter run
+
+# Build APK
+flutter build apk --release
+```
+
+**Tech Stack:**
+- Flutter 3.32.8, Dart 3.8.1
+- Provider for state management
+- SharedPref for leaderboard persistence
+- GitHub Actions: CI/CD
+- Math rendering: flutter_math_fork
+- System Dark/Light theme
+
+## Download APK
+
+- [**Google Drive**](your-gdrive-link) 
+- [**GitHub Actions**](https://github.com/niajnm/quiz-app/actions)
+
+## Screenshots
+
+| Home Screen | Quiz Screen | Results Screen | Leaderboard |
+|-------------|-------------|----------------|-------------|
+| ![Home](screenshots/home.png) | ![Quiz](screenshots/quiz.png) | ![Results](screenshots/results.png) | ![Leaderboard](screenshots/leaderboard.png) |
+
+## Task Completion
+
+**Core Features:**
+- ✓ Home Screen with Start Quiz & Leaderboard buttons
+- ✓ Quiz Flow with LaTeX support
+- ✓ Results Screen with score calculation
+- ✓ Leaderboard Screen with persistent storage
+
+**Bonus Features:**
+- ✓ Timed questions with countdown
+- ✓ Smooth question transitions
+- ✓ System-aware dark mode
+- ✓ Unit tests for score calculation
+- ✓ CI/CD with GitHub Actions
+
+---
+
+*Built with focus on code quality, clean architecture, and modern Flutter best practices.*

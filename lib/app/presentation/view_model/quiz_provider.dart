@@ -1,15 +1,14 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:quiz/app/data/local/question_local/questions_local_source.dart';
+import 'package:quiz/app/data/local/preference/score_local_source.dart';
 import 'package:quiz/app/data/repository/questions_repository_source.dart';
-import 'package:quiz/app/module/home/model/model.dart';
-import 'package:quiz/app/utils/core/services/service_locator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/services.dart';
+import 'package:quiz/app/domain/model/question_model.dart';
+import 'package:quiz/app/route/route_paths.dart';
+import 'package:quiz/app/core/services/service_locator.dart';
 
 class QuizProvider with ChangeNotifier {
   final QuestionRepositorySource _questionSource =
       serviceLocator<QuestionRepositorySource>();
+
   List<Question> _questions = [];
   int _currentIndex = 0;
   int _score = 0;
@@ -31,15 +30,32 @@ class QuizProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // void selectAnswer(int index) {
+  //   if (_answered) return;
+  //   _selectedAnswer = index;
+  //   _answered = true;
+
+  //   // Handle timer expiry (index -1) or valid answer
+  //   if (index >= 0 && _questions[_currentIndex].answerIndex == index) {
+  //     _score++;
+  //   }
+
+  //   notifyListeners();
+  // }
   void selectAnswer(int index) {
     if (_answered) return;
+
     _selectedAnswer = index;
     _answered = true;
 
     // Handle timer expiry (index -1) or valid answer
-    if (index >= 0 && _questions[_currentIndex].answerIndex == index) {
-      _score++;
+    // Only increment score if it's a valid answer selection and correct
+    if (index >= 0 && index < _questions[_currentIndex].options.length) {
+      if (_questions[_currentIndex].answerIndex == index) {
+        _score++;
+      }
     }
+    // If index is -1 (time expired), no score increment (counts as wrong)
 
     notifyListeners();
   }
@@ -50,36 +66,18 @@ class QuizProvider with ChangeNotifier {
       _answered = false;
       _selectedAnswer = null;
     } else {
-      // Quiz finished: navigate to ResultScreen
-      Navigator.pushReplacementNamed(context, '/result');
+      Navigator.pushReplacementNamed(context, RoutePaths.result);
     }
     notifyListeners();
   }
 
+  final ScoreLocalSource _scoreSource = serviceLocator<ScoreLocalSource>();
   Future<void> saveScore(String name) async {
-    final prefs = await SharedPreferences.getInstance();
-    _leaderboard =
-        prefs
-            .getStringList('leaderboard')
-            ?.map((e) => json.decode(e) as Map<String, dynamic>)
-            .toList() ??
-        [];
-    _leaderboard.add({"name": name, "score": _score});
-    _leaderboard.sort((a, b) => b["score"].compareTo(a["score"]));
-    await prefs.setStringList(
-      'leaderboard',
-      _leaderboard.map((e) => json.encode(e)).toList(),
-    );
+    await _scoreSource.saveScore(name, _score);
   }
 
   Future<void> loadLeaderboard() async {
-    final prefs = await SharedPreferences.getInstance();
-    _leaderboard =
-        prefs
-            .getStringList('leaderboard')
-            ?.map((e) => json.decode(e) as Map<String, dynamic>)
-            .toList() ??
-        [];
+    _leaderboard = await _scoreSource.loadLeaderboard();
     notifyListeners();
   }
 

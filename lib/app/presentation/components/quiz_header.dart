@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/app/module/home/components/quiz_progress_bar.dart';
-import 'package:quiz/app/module/home/components/timer_circle.dart';
+import 'package:quiz/app/presentation/components/quiz_progress_bar.dart';
+import 'package:quiz/app/presentation/components/timer_circle.dart';
 
 class QuizHeader extends StatelessWidget {
   final int current;
@@ -9,6 +9,7 @@ class QuizHeader extends StatelessWidget {
   final int timeLeft;
 
   const QuizHeader({
+    super.key,
     required this.current,
     required this.total,
     required this.progress,

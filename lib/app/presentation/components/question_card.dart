@@ -1,6 +1,6 @@
 // components/question_card.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_math_fork/flutter_math.dart';
+import 'package:quiz/app/core/utils/math_text_parser.dart';
 
 class QuestionCard extends StatelessWidget {
   final String question;
@@ -10,16 +10,19 @@ class QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final textStyle = theme.textTheme.titleSmall?.copyWith(
+      fontWeight: FontWeight.w400,
+    );
+
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
         padding: const EdgeInsets.all(20),
-        child: Math.tex(
+        child: MathTextParser.createMixedContentWidget(
           question,
-          textStyle: theme.textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.w500,
-          ),
+          textStyle: textStyle,
+          crossAxisAlignment: WrapCrossAlignment.center,
         ),
       ),
     );

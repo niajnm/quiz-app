@@ -6,14 +6,21 @@ class TimerProvider with ChangeNotifier {
 
   Timer? _timer;
   int _timeLeft = questionTime;
-
   AnimationController? animationController;
+
+  // Add callback for time expiry
+  VoidCallback? _onTimeExpired;
 
   int get timeLeft => _timeLeft;
 
-  /// Add this method to initialize the AnimationController from State
+  /// Initialize the AnimationController from State
   void initAnimationController(AnimationController controller) {
     animationController = controller;
+  }
+
+  /// Set callback for when time expires
+  void setTimeExpiredCallback(VoidCallback callback) {
+    _onTimeExpired = callback;
   }
 
   void startTimer() {
@@ -25,8 +32,11 @@ class TimerProvider with ChangeNotifier {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       _timeLeft--;
       notifyListeners();
+
       if (_timeLeft <= 0) {
         timer.cancel();
+        // Trigger the time expired callback
+        _onTimeExpired?.call();
         notifyListeners();
       }
     });

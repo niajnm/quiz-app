@@ -4,8 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:quiz/app/data/remote/fetch/model/GetResModel.dart';
 import 'package:quiz/app/data/remote/fetch/model/PostResponseModel.dart';
 import 'package:quiz/app/data/remote/fetch/remote_source.dart';
-import 'package:quiz/app/utils/core/base/base_remote_source.dart';
-import 'package:quiz/app/utils/core/services/service_locator.dart';
+import 'package:quiz/app/core/base/base_remote_source.dart';
 
 class RemoteSourceImpl extends BaseRemoteSource implements RemoteSource {
   @override
@@ -14,7 +13,7 @@ class RemoteSourceImpl extends BaseRemoteSource implements RemoteSource {
     log('CreateApiService -- ${param.toJson()}');
     try {
       var formData = await param.toFormData();
-      var endpoint = 'RemoteEndPaths.FISH_COMPLAIN_API';
+      var endpoint = 'RemoteEndPaths._API';
       var dioCall = dioClient.post(endpoint, data: formData);
 
       return callApiWithErrorParser(
@@ -31,11 +30,8 @@ class RemoteSourceImpl extends BaseRemoteSource implements RemoteSource {
 
   @override
   Future fetchGet(complainId) async {
-    var userId = await '_userRepository.getUserId()';
-    // var endpoint = "project/dealer/cat/marketing/officer/wise/dd/list/$CategoryId/$userId";
-    var endpoint = 'RemoteEndPaths.dealerListDropAPI';
+    var endpoint = 'RemoteEndPaths.ListDropAPI';
     var dioCall = dioClient.get(endpoint);
-
     try {
       return callApiWithErrorParser(
         dioCall,

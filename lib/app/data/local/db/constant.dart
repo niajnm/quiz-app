@@ -1,4 +1,5 @@
 const REPO_TABLE = "repo";
+// ignore: constant_identifier_names
 const DATABASE_NAME = "project.db";
 const REPO_ID = "id";
 const COLUMN_NAME = "name";

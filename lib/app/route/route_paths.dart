@@ -1,6 +1,6 @@
 class RoutePaths {
-  static const String main = '/main';
-  static const String home = '/home';
-  static const String setting = '/setting';
-  static const String detailsPage = '/details-page';
+  static const String home = '/';
+  static const String quiz = '/quiz';
+  static const String result = '/result';
+  static const String leaderboard = '/leaderboard';
 }
