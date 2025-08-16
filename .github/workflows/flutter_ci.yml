@@ -21,7 +21,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0' # Use your Flutter version
+          flutter-version: '3.2.3' # Use your Flutter version
           channel: 'stable'
 
       # Install dependencies
@@ -34,21 +34,21 @@ jobs:
 
       # Build APK
       - name: Build APK
-        run: flutter build apk --release
+        run: flutter build apk 
 
-      # Build AppBundle (for Play Store)
-      - name: Build AppBundle
-        run: flutter build appbundle --release
+      # # Build AppBundle (for Play Store)
+      # - name: Build AppBundle
+      #   run: flutter build appbundle 
 
-      # Upload build artifacts
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+      # # Upload build artifacts
+      # - name: Upload APK
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: release-apk
+      #     path: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: Upload AAB
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-aab
-          path: build/app/outputs/bundle/release/app-release.aab
+      # - name: Upload AAB
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: release-aab
+      #     path: build/app/outputs/bundle/release/app-release.aab
