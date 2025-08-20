@@ -49,8 +49,7 @@ lib/app/
 ## Quick Start
 
 ```bash
-# Clone & Setup
-git clone <repository-url>
+
 cd flutter-quiz-app
 flutter pub get
 
@@ -71,7 +70,7 @@ flutter build apk --release
 
 ## Download APK
 
-- [**Google Drive**](your-gdrive-link) 
+- [**Google Drive**](https://drive.google.com/drive/folders/1LD34Cxnm7plJj9YDew87icIDQDYsKEoK) 
 - [**GitHub Actions**](https://github.com/niajnm/quiz-app/actions)
 
 ## Screenshots
